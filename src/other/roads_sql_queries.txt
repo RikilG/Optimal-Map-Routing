@@ -1,0 +1,94 @@
+select name, way_area, place from planet_osm_polygon where name like 'Ward%';
+select st_y(st_transform(st_startpoint(way), 4326)) as latitude, st_x(st_transform(st_startpoint(way), 4326)) as longitude from planet_osm_roads limit 5;
+select st_y(st_transform(st_centroid(way), 4326)) as latitude, st_x(st_transform(st_centroid(way), 4326)) as longitude from planet_osm_roads limit 5;
+select st_y(st_transform(way, 4326)) as latitude, st_x(st_transform(way, 4326)) as longitude from planet_osm_point limit 5;
+select count(osm_id) from planet_osm_roads where st_contains(st_transform(st_makeenvelope(78.2315,17.2015,78.6865,17.6098,4326),3857),planet_osm_roads.way);
+
+bbox:
+    left  side: lon: 78.2315
+    below rgia: lat: 17.2015
+    right side: lon: 78.6865
+    above bits: lat: 17.6098
+BITS:
+    lat: 17.547323
+    lon: 78.572519
+RGIA:
+    lat: 17.240852
+    lon: 78.429417
+
+                                             Table "public.planet_osm_roads"
+       Column       |           Type            | Collation | Nullable | Default | Storage  | Stats target | Description 
+--------------------+---------------------------+-----------+----------+---------+----------+--------------+-------------
+ osm_id             | bigint                    |           |          |         | plain    |              | 
+ access             | text                      |           |          |         | extended |              | 
+ addr:housename     | text                      |           |          |         | extended |              | 
+ addr:housenumber   | text                      |           |          |         | extended |              | 
+ addr:interpolation | text                      |           |          |         | extended |              | 
+ admin_level        | text                      |           |          |         | extended |              | 
+ aerialway          | text                      |           |          |         | extended |              | 
+ aeroway            | text                      |           |          |         | extended |              | 
+ amenity            | text                      |           |          |         | extended |              | 
+ area               | text                      |           |          |         | extended |              | 
+ barrier            | text                      |           |          |         | extended |              | 
+ bicycle            | text                      |           |          |         | extended |              | 
+ brand              | text                      |           |          |         | extended |              | 
+ bridge             | text                      |           |          |         | extended |              | 
+ boundary           | text                      |           |          |         | extended |              | 
+ building           | text                      |           |          |         | extended |              | 
+ construction       | text                      |           |          |         | extended |              | 
+ covered            | text                      |           |          |         | extended |              | 
+ culvert            | text                      |           |          |         | extended |              | 
+ cutting            | text                      |           |          |         | extended |              | 
+ denomination       | text                      |           |          |         | extended |              | 
+ disused            | text                      |           |          |         | extended |              | 
+ embankment         | text                      |           |          |         | extended |              | 
+ foot               | text                      |           |          |         | extended |              | 
+ generator:source   | text                      |           |          |         | extended |              | 
+ harbour            | text                      |           |          |         | extended |              | 
+ highway            | text                      |           |          |         | extended |              | 
+ historic           | text                      |           |          |         | extended |              | 
+ horse              | text                      |           |          |         | extended |              | 
+ intermittent       | text                      |           |          |         | extended |              | 
+ junction           | text                      |           |          |         | extended |              | 
+ landuse            | text                      |           |          |         | extended |              | 
+ layer              | text                      |           |          |         | extended |              | 
+ leisure            | text                      |           |          |         | extended |              | 
+ lock               | text                      |           |          |         | extended |              | 
+ man_made           | text                      |           |          |         | extended |              | 
+ military           | text                      |           |          |         | extended |              | 
+ motorcar           | text                      |           |          |         | extended |              | 
+ name               | text                      |           |          |         | extended |              | 
+ natural            | text                      |           |          |         | extended |              | 
+ office             | text                      |           |          |         | extended |              | 
+ oneway             | text                      |           |          |         | extended |              | 
+ operator           | text                      |           |          |         | extended |              | 
+ place              | text                      |           |          |         | extended |              | 
+ population         | text                      |           |          |         | extended |              | 
+ power              | text                      |           |          |         | extended |              | 
+ power_source       | text                      |           |          |         | extended |              | 
+ public_transport   | text                      |           |          |         | extended |              | 
+ railway            | text                      |           |          |         | extended |              | 
+ ref                | text                      |           |          |         | extended |              | 
+ religion           | text                      |           |          |         | extended |              | 
+ route              | text                      |           |          |         | extended |              | 
+ service            | text                      |           |          |         | extended |              | 
+ shop               | text                      |           |          |         | extended |              | 
+ sport              | text                      |           |          |         | extended |              | 
+ surface            | text                      |           |          |         | extended |              | 
+ toll               | text                      |           |          |         | extended |              | 
+ tourism            | text                      |           |          |         | extended |              | 
+ tower:type         | text                      |           |          |         | extended |              | 
+ tracktype          | text                      |           |          |         | extended |              | 
+ tunnel             | text                      |           |          |         | extended |              | 
+ water              | text                      |           |          |         | extended |              | 
+ waterway           | text                      |           |          |         | extended |              | 
+ wetland            | text                      |           |          |         | extended |              | 
+ width              | text                      |           |          |         | extended |              | 
+ wood               | text                      |           |          |         | extended |              | 
+ z_order            | integer                   |           |          |         | plain    |              | 
+ way_area           | real                      |           |          |         | plain    |              | 
+ way                | geometry(LineString,3857) |           |          |         | main     |              | 
+Indexes:
+    "planet_osm_roads_way_idx" gist (way) WITH (fillfactor='100')
+Access method: heap
+
